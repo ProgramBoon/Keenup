@@ -1,14 +1,19 @@
-import psutil
 import sys
-sys.path.append('/home/user/PycharmProjects/monitor1/Keenup.lib')
+import os
+sys.path.append(os.getcwd()+'/Keenup.lib')
 import sne
+
+
 
 
 sne.Sne._getInfo()
 
 sne.Sne._toPrint()
 
-sne.SneToString._PrintToString()
+
+# sne.SneToString._PrintToString()
+
+
 
 
 # deviceInfo = dict()
