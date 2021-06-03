@@ -16,15 +16,17 @@ class Sne(object):
 
         proc.append({psutil.cpu_percent()}) #shows cpu load
 
+        proc.append('cpu_times_percent')
         proc.append(psutil.cpu_times_percent()._asdict()) #shows procentile cpu load
 
         # логические
-
+        proc.append('cpu_count(logical=True)')
         a = psutil.cpu_count(logical=True)
         proc.append(ast.literal_eval(str(a))) #shows quantity of cpu log cores
 
 
         # физические
+        proc.append('cpu_count(logical=f)')
         a = psutil.cpu_count(logical=False)
         proc.append(ast.literal_eval(str(a))) #shows quantity of cpu real cores
 
@@ -44,7 +46,6 @@ class Sne(object):
         # в процентах
         q = [x / psutil.cpu_count() * 100 for x in psutil.getloadavg()]
         proc.append(dict.fromkeys(q))
-        proc.append(q)
         return proc
 
     @staticmethod
@@ -60,9 +61,9 @@ class Sne(object):
     def getDiscI(): #get disc info
         disc = []
 
-        disc.append(dict.fromkeys(psutil.disk_partitions()))
+        # disc.append(dict.fromkeys(psutil.disk_partitions()))
         disc.append(psutil.disk_io_counters()._asdict())
-        disc.append(psutil.disk_io_counters(perdisk=True))
+        # disc.append(psutil.disk_io_counters(perdisk=True))
 
         return disc
 
@@ -70,7 +71,7 @@ class Sne(object):
     def getNetI():#get net info
         net = []
         net.append(psutil.net_io_counters()._asdict())
-        net.append(psutil.net_io_counters(pernic=True))
+        # net.append(psutil.net_io_counters(pernic=True))
 
         net.append(dict.fromkeys(psutil.net_connections()))
 
@@ -99,6 +100,7 @@ class Sne(object):
     @classmethod
     def _toPrint(self): #prints info
         print(self._info)
+        self._info = []
 
 
 class SneToString(Sne): #prints info as string
