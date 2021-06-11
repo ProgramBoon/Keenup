@@ -40,6 +40,13 @@ class XML:
         item = xml.SubElement(list, "database")
         item.text = "keenup"
 
+        list = xml.Element("list")
+        rootXML.append(list)
+
+        item: xml.SubElement
+
+        item = xml.SubElement(list, "cron")
+        item.text = "30"
 
         file = open(self.fileName, "w")
         file.write(xml.tostring(rootXML, encoding="utf-8", method="xml").decode(encoding="utf-8"))
